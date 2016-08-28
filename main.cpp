@@ -2,7 +2,7 @@
 
 int main() {
 
-  int32_t size[2] = { 1000, 1000 };
+  int32_t size[2] = { 100, 100 };
   ImageBuffer buffer(size[0], size[1]);
   for (int i = 0; i < size[0]; i++)
     for (int j = 0; j < size[1]; j++) {
@@ -12,6 +12,7 @@ int main() {
       color.b = (static_cast<float>(i * size[1] + j)) / static_cast<float>(size[0]*size[1]);
     }
 
+  buffer.saveBMP("test.png");
   buffer.savePPM("test.ppm");
 
   return 0;

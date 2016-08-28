@@ -21,10 +21,12 @@ public:
   const Color3fa& operator()(const uint32_t& x, const uint32_t& y) const;
 
   bool savePPM(const std::string& filePath) const;
+  bool saveBMP(const std::string& filePath) const;
+  bool savePNG(const std::string& filePath) const;
 
 
 private:
-  uint32_t                           m_width, m_height;
+  int32_t                            m_width, m_height;
   std::vector<std::vector<Color3fa>> m_colorBuffer;
 };
 
