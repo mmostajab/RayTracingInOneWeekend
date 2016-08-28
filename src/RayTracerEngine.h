@@ -36,6 +36,9 @@ private:
   ImageBuffer m_buffer;
   Camera      m_camera;
   std::vector<std::shared_ptr<Hitable>> m_hitables;
+
+  // Number of samples per pixel
+  uint32_t    m_nSpP;
 };
 
 #endif

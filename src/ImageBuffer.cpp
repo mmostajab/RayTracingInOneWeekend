@@ -89,9 +89,13 @@ bool ImageBuffer::savePNG(const std::string & filePath) const
 
   for (int32_t y = m_height - 1; y >= 0; y--)
     for (int32_t x = 0; x < m_width; x++) {
-      data[3 * (m_width * y + x) + 0] = static_cast<uint8_t>(m_colorBuffer[-(y - m_height + 1)][x].r * 255.9);
-      data[3 * (m_width * y + x) + 1] = static_cast<uint8_t>(m_colorBuffer[-(y - m_height + 1)][x].g * 255.9);
-      data[3 * (m_width * y + x) + 2] = static_cast<uint8_t>(m_colorBuffer[-(y - m_height + 1)][x].b * 255.9);
+      //data[3 * (m_width * y + x) + 0] = static_cast<uint8_t>(m_colorBuffer[m_height - y - 1][x].r * 255.9);
+      //data[3 * (m_width * y + x) + 1] = static_cast<uint8_t>(m_colorBuffer[m_height - y - 1][x].g * 255.9);
+      //data[3 * (m_width * y + x) + 2] = static_cast<uint8_t>(m_colorBuffer[m_height - y - 1][x].b * 255.9);
+
+      data[3 * (m_width * y + x) + 0] = static_cast<uint8_t>(m_colorBuffer[y][x].r * 255.9);
+      data[3 * (m_width * y + x) + 1] = static_cast<uint8_t>(m_colorBuffer[y][x].g * 255.9);
+      data[3 * (m_width * y + x) + 2] = static_cast<uint8_t>(m_colorBuffer[y][x].b * 255.9);
     }
 
   if (stbi_write_png(filePath.c_str(), m_width, m_height, 3, data.data(), 0) == 1)
