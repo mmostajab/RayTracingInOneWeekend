@@ -17,16 +17,16 @@ void ImageBuffer::resize(const uint32_t& _width, const uint32_t& _height)
 {
   m_colorBuffer.resize(_height);
   for (uint32_t y = 0; y < _height; y++) {
-    m_colorBuffer[y].resize(_width, Color3fa(0.0f, 0.0f, 0.0f, 0.0f));
+    m_colorBuffer[y].resize(_width, glm::vec3(0.0f, 0.0f, 0.0f));
   }
 }
 
-Color3fa & ImageBuffer::operator()(const uint32_t & x, const uint32_t & y)
+glm::vec3& ImageBuffer::operator()(const uint32_t & x, const uint32_t & y)
 {
   return m_colorBuffer[y][x];
 }
 
-const Color3fa & ImageBuffer::operator()(const uint32_t & x, const uint32_t & y) const
+const glm::vec3 &ImageBuffer::operator()(const uint32_t & x, const uint32_t & y) const
 {
   return m_colorBuffer[y][x];
 }
@@ -43,7 +43,7 @@ bool ImageBuffer::savePPM(const std::string& filePath) const
 
   for (int32_t y = m_height - 1; y >= 0; y--)
     for (int32_t x = 0; x < m_width; x++) {
-      const Color3fa& color = (*this)(x, y);
+      const glm::vec3& color = (*this)(x, y);
 
       const int32_t r = static_cast<int32_t>(color.r * 255.9f);
       const int32_t g = static_cast<int32_t>(color.g * 255.9f);

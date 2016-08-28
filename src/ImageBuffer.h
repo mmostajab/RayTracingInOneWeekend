@@ -7,8 +7,10 @@
 #include <iostream>
 #include <fstream>
 
+// GLM
+#include <glm/glm.hpp>
+
 // RayTracingInOneWeekend
-#include "Color.h"
 
 class ImageBuffer {
 public:
@@ -17,8 +19,8 @@ public:
 
   void resize(const uint32_t& width, const uint32_t& height);
 
-  Color3fa& operator()(const uint32_t& x, const uint32_t& y);
-  const Color3fa& operator()(const uint32_t& x, const uint32_t& y) const;
+  glm::vec3& operator()(const uint32_t& x, const uint32_t& y);
+  const glm::vec3& operator()(const uint32_t& x, const uint32_t& y) const;
 
   bool savePPM(const std::string& filePath) const;
   bool saveBMP(const std::string& filePath) const;
@@ -27,7 +29,7 @@ public:
 
 private:
   int32_t                            m_width, m_height;
-  std::vector<std::vector<Color3fa>> m_colorBuffer;
+  std::vector<std::vector<glm::vec3>> m_colorBuffer;
 };
 
 #endif // __IMAGE_BUFFER_H__
