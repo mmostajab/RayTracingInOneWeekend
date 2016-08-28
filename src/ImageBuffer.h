@@ -19,6 +19,9 @@ public:
 
   void resize(const uint32_t& width, const uint32_t& height);
 
+  uint32_t getWidth()  const;
+  uint32_t getHeight() const;
+
   glm::vec3& operator()(const uint32_t& x, const uint32_t& y);
   const glm::vec3& operator()(const uint32_t& x, const uint32_t& y) const;
 

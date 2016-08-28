@@ -19,10 +19,20 @@ glm::vec3 Ray::origin() const
 
 glm::vec3 Ray::direction() const
 {
-  return m_origin;
+  return m_dir;
 }
 
 glm::vec3 Ray::point_at_param(const float & t) const
 {
   return m_origin + t * m_dir;
+}
+
+void Ray::setOrigin(const glm::vec3 & _origin)
+{
+  m_origin = _origin;
+}
+
+void Ray::setDirection(const glm::vec3 & _dir)
+{
+  m_dir = _dir;
 }

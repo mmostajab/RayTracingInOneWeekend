@@ -21,6 +21,16 @@ void ImageBuffer::resize(const uint32_t& _width, const uint32_t& _height)
   }
 }
 
+uint32_t ImageBuffer::getWidth() const
+{
+  return m_width;
+}
+
+uint32_t ImageBuffer::getHeight() const
+{
+  return m_height;
+}
+
 glm::vec3& ImageBuffer::operator()(const uint32_t & x, const uint32_t & y)
 {
   return m_colorBuffer[y][x];
@@ -62,9 +72,9 @@ bool ImageBuffer::saveBMP(const std::string & filePath) const
 
   for (int32_t y = m_height - 1; y >= 0; y--)
     for (int32_t x = 0; x < m_width; x++) {
-      data[3 * (m_width * y + x) + 0] = static_cast<uint8_t>(m_colorBuffer[y][x].r * 255.9);
-      data[3 * (m_width * y + x) + 1] = static_cast<uint8_t>(m_colorBuffer[y][x].g * 255.9);
-      data[3 * (m_width * y + x) + 2] = static_cast<uint8_t>(m_colorBuffer[y][x].b * 255.9);
+      data[3 * (m_width * y + x) + 0] = static_cast<uint8_t>(m_colorBuffer[-(y - m_height + 1)][x].r * 255.9);
+      data[3 * (m_width * y + x) + 1] = static_cast<uint8_t>(m_colorBuffer[-(y - m_height + 1)][x].g * 255.9);
+      data[3 * (m_width * y + x) + 2] = static_cast<uint8_t>(m_colorBuffer[-(y - m_height + 1)][x].b * 255.9);
     }
 
   if(stbi_write_bmp(filePath.c_str(), m_width, m_height, 3, data.data()) == 1)
@@ -79,9 +89,9 @@ bool ImageBuffer::savePNG(const std::string & filePath) const
 
   for (int32_t y = m_height - 1; y >= 0; y--)
     for (int32_t x = 0; x < m_width; x++) {
-      data[3 * (m_width * y + x) + 0] = static_cast<uint8_t>(m_colorBuffer[y][x].r * 255.9);
-      data[3 * (m_width * y + x) + 1] = static_cast<uint8_t>(m_colorBuffer[y][x].g * 255.9);
-      data[3 * (m_width * y + x) + 2] = static_cast<uint8_t>(m_colorBuffer[y][x].b * 255.9);
+      data[3 * (m_width * y + x) + 0] = static_cast<uint8_t>(m_colorBuffer[-(y - m_height + 1)][x].r * 255.9);
+      data[3 * (m_width * y + x) + 1] = static_cast<uint8_t>(m_colorBuffer[-(y - m_height + 1)][x].g * 255.9);
+      data[3 * (m_width * y + x) + 2] = static_cast<uint8_t>(m_colorBuffer[-(y - m_height + 1)][x].b * 255.9);
     }
 
   if (stbi_write_png(filePath.c_str(), m_width, m_height, 3, data.data(), 0) == 1)
