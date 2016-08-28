@@ -3,8 +3,11 @@
 
 // STD
 #include <string>
+#include <vector>
+#include <memory>
 
 // Ray Tracing in One Weekend
+#include "Hitable.h"
 #include "Camera.h"
 #include "ImageBuffer.h"
 #include "Ray.h"
@@ -24,12 +27,15 @@ public:
 
   void saveOutput(OutputFormat format, const std::string& filePath);
 
+  void addHitable(std::shared_ptr<Hitable> newHitablePtr);
+
 private:
   glm::vec3 getBackColor(const Ray& ray) const;
 
 private:
   ImageBuffer m_buffer;
   Camera      m_camera;
+  std::vector<std::shared_ptr<Hitable>> m_hitables;
 };
 
 #endif
