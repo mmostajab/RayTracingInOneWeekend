@@ -30,6 +30,7 @@ void RayTracerEngine::render()
       // pixel color
       glm::vec3& color = m_buffer(x, y);
       
+      // Sending more rays per pixel
       for (uint32_t s = 0; s < m_nSpP; s++) {
         //std::cout << dis(gen) << " " << std::endl;
         float u = glm::clamp(static_cast<float>(x + static_cast<float>(dis(gen))) / static_cast<float>(m_buffer.getWidth()) , 0.0f, 1.0f);
@@ -38,6 +39,7 @@ void RayTracerEngine::render()
 
         Ray ray = m_camera.getRay(u, v);
 
+        // intersecting ray with hitable primitives
         for (auto& hitable : m_hitables) {
           HitRecord hitRecord;
           if (hitable->hit(ray, t_min, t_max, hitRecord)) {
@@ -46,9 +48,11 @@ void RayTracerEngine::render()
           }
         }
 
+        // if it does not intersect with any primitive
         if (t_max == std::numeric_limits<float>::max()) color += getBackColor(ray);
       }
 
+      // averaging all collected samples
       color /= m_nSpP;
     }
 }
